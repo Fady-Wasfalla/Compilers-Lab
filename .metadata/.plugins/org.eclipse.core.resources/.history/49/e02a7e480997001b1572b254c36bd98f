@@ -1,0 +1,16 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class State {
+	
+	String name;
+	Hashtable <String, String> transitions;
+	Boolean goal;
+	
+	public State(String name,Hashtable <String, State[]> transitions,Boolean goal) {
+		this.name=name;
+		this.transitions=transitions;
+		this.goal=goal;
+	}
+}

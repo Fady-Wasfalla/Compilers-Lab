@@ -1,0 +1,10 @@
+package lab_2;
+
+public class NFA {
+	
+	State [] states;
+	State [][] epsilonStates;
+	
+	
+	
+}

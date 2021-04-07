@@ -1,0 +1,20 @@
+package lab_2;
+
+import java.util.*;
+
+public class NFA {
+	
+	State [] states;
+	
+	
+	public static void main(String[]args) {
+		String inputNfa = "0,0;1,2;3,3#0,0;0,1;2,3;3,3#1,2#3";
+		
+		Hashtable<String, State> nfaStates = new Hashtable<String, State>();
+		
+		String [] transitions = inputNfa.split("#",0);
+		String[] zeroTransitions = transitions[0].split(",",0);
+	}
+	
+	
+}

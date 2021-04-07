@@ -1,0 +1,13 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class State {
+	
+	String name;
+	Hashtable <String, State[]> transition0;
+	Hashtable <String, State[]> transition1;
+	Hashtable <String, State[]> transitionE;
+	Boolean acceptance;
+	
+}

@@ -1,0 +1,23 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class DFA {
+
+	Hashtable<String, DFAState> dfaTable;
+	String [] testCases;
+	
+	public DFA(Hashtable<String, DFAState> dfaTable,String [] testCases) {
+		this.dfaTable=dfaTable;
+		this.testCases=testCases;
+	}
+	public void run() {
+		for (int i=0;i<testCases.length;i++) {
+			for (int j=0;j<testCases[i].length();j++) {
+				
+			}
+		}
+	}
+
+
+}

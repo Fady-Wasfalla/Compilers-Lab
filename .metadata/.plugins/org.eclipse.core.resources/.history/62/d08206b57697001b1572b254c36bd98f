@@ -1,0 +1,45 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class DFA {
+
+	Hashtable<String, DFAState> dfaTable;
+	String [] testCases;
+	String startState;
+	
+	
+	public DFA(Hashtable<String, DFAState> dfaTable,String [] testCases,String startState) {
+		this.dfaTable=dfaTable;
+		this.testCases=testCases;
+		this.startState=startState;
+	}
+	
+	public void run() {
+		dfaTable.forEach((k,v)->{
+			System.out.println(v.name+" -> "+v.transition0.name+" -> "+v.transition1.name+" -> "+v.goal);
+		});
+//		DFAState x = dfaTable.get("01");
+//		System.out.println("8888888888888888888888888  "+x.transition1.name);
+		for (int i=0;i<testCases.length;i++) {
+			DFAState currentState= dfaTable.get(startState);
+//			System.out.println(testCases[i]+" ==> ");
+			boolean flag = false;
+			for (int j=0;j<testCases[i].length();j++) {
+				System.out.println("trans0 : "+currentState.transition0.name+" trans1 : "+currentState.transition1.name);
+				System.out.print(currentState.name+" , "+testCases[i].charAt(j)+" ==> ");
+				if(testCases[i].charAt(j)=='0'){
+					currentState = currentState.transition0;
+				}
+				else{
+					currentState = currentState.transition1;
+				}
+				System.out.println(currentState.name);
+			}
+			flag = currentState.goal;
+			System.out.println(flag);
+		}
+	}
+
+
+}

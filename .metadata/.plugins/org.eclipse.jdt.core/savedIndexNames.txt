@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+/home/fady/Documents/Semester 10/Compilers_Labs/.metadata/.plugins/org.eclipse.jdt.core
+1198767479.index
+650580799.index
+646308851.index
+3217965701.index

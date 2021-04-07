@@ -1,0 +1,176 @@
+package lab_2;
+
+import java.util.*;
+
+
+public class NFA {
+	
+	
+	public static Hashtable<String, State> constructTables(String inputNfa) {
+		Hashtable<String, State> nfaStates = new Hashtable<String, State>();
+		
+		String statesNames = inputNfa.replaceAll("\\D+","");
+
+		String[] transitions = inputNfa.split("#",0);
+		String[] zeroTransitions = transitions[0].split(";",0);
+		String[] oneTransitions = transitions[1].split(";",0);
+		String[] epsilonTransitions = transitions[2].split(";",0);
+		String goals = transitions[3];
+		
+		// initialize the states 
+		for (int i=0;i<statesNames.length();i++) {
+			if ( nfaStates.get(statesNames.charAt(i)) == null) {
+				Hashtable <String, String> epsilonTrans = new Hashtable <String, String>();
+				epsilonTrans.put("epsilon", ""+statesNames.charAt(i)); // add the state to itself as an epsilon transition state
+				epsilonTrans.put("zero", "");
+				epsilonTrans.put("one", "");
+				State temp = new State(""+statesNames.charAt(i),epsilonTrans);
+				nfaStates.put(temp.name, temp);
+			}
+		}
+		
+
+		nfaStates.forEach((k,v)->{
+			for (int i=0;i<v.transitions.get("epsilon").length();i++) {
+				for (int j=0;j<epsilonTransitions.length;j++) {
+					//check if the transition in each state has another transitions EX : 1->2 , 2->3 
+					String currentTrans = v.transitions.get("epsilon");
+					if( currentTrans.charAt(i) == epsilonTransitions[j].charAt(0) ) {
+						if ( currentTrans.indexOf(epsilonTransitions[j].charAt(2)) == -1 )	{
+//							v.goal = v.goal | nfaStates.get( ""+epsilonTransitions[j].charAt(2) ).goal ;
+							v.transitions.replace("epsilon",currentTrans+epsilonTransitions[j].charAt(2));
+							nfaStates.replace(k, v);
+							i=0;
+							j=0;
+						}
+					}
+				}
+			}			
+			nfaStates.replace(k, v);
+		});
+		
+		nfaStates.forEach((k,v)->{
+			for (int i=0;i<zeroTransitions.length;i++) {
+				if( zeroTransitions[i].charAt(0) == v.name.charAt(0) ) {
+					String currentTrans = v.transitions.get("zero");
+					v.transitions.replace("zero",currentTrans+ nfaStates.get(zeroTransitions[i].charAt(2)+"").transitions.get("epsilon") );
+					nfaStates.replace(k, v);
+				}
+			}
+			for (int i=0;i<oneTransitions.length;i++) {
+				if( oneTransitions[i].charAt(0) == v.name.charAt(0) ) {
+					String currentTrans = v.transitions.get("one");
+					v.transitions.replace("one",currentTrans+ nfaStates.get(oneTransitions[i].charAt(2)+"").transitions.get("epsilon") );
+					nfaStates.replace(k, v);
+				}
+			}
+			nfaStates.replace(k, v);
+		});
+		
+		nfaStates.forEach((k,v)->{
+			System.out.println(v.name+" => "+v.transitions.get("epsilon")+" => "+v.transitions.get("zero")+" => "+v.transitions.get("one"));
+		});
+		System.out.println("======================================================");
+		return nfaStates;
+	}
+	
+	public static Boolean goalTest(String a,String b) {
+		Boolean flag = false;
+		String[] strSplitA = a.split("");
+        ArrayList<String> strListA1 = new ArrayList<String>(Arrays.asList(strSplitA));
+        ArrayList<String> strListA2 = new ArrayList<String>(Arrays.asList(strSplitA));
+        
+        String[] strSplitB = b.split("");
+        ArrayList<String> strListB1 = new ArrayList<String>(Arrays.asList(strSplitB));
+        strListA1.removeAll(strListB1);
+        
+        if ( strListA1.size() != strListA2.size()  ) {
+        	flag = true;
+        }
+		return flag;
+	}
+	
+	public static String arrangeStateLetters(String st) {
+		char[] chars = st.toCharArray();
+		Arrays.sort(chars);
+		String newWord = new String(chars);
+		return newWord;
+	}
+	
+	public static Hashtable<String, DFAState> nfaToDfa(Hashtable<String, State> nfaTable , String startState,String goals) {
+		// v.name || v.transitions.get("epsilon") || v.transitions.get("zero") || v.transitions.get("one") 
+		
+		Hashtable<String, DFAState> dfaTable = new Hashtable<String, DFAState>();
+		
+		dfaTable.put( startState , new DFAState( nfaTable.get(startState).name ));
+		
+		ArrayList<String> dfaStates = new ArrayList<String>();
+		dfaStates.add(startState);
+		
+		for (int i=0;i<dfaStates.size();i++) {
+			String toStateWith0 = "";
+			String toStateWith1 = "";
+			for(int j=0;j<dfaStates.get(i).length();j++) {
+				if (toStateWith0.indexOf(nfaTable.get(""+dfaStates.get(i).charAt(j)).transitions.get("zero"))==-1) {
+					toStateWith0+=nfaTable.get(""+dfaStates.get(i).charAt(j)).transitions.get("zero");
+				}
+				if (toStateWith1.indexOf(nfaTable.get(""+dfaStates.get(i).charAt(j)).transitions.get("one"))==-1) {
+					toStateWith1+=nfaTable.get(""+dfaStates.get(i).charAt(j)).transitions.get("one");
+				}
+			}
+			toStateWith0 = arrangeStateLetters(toStateWith0);
+			toStateWith1 = arrangeStateLetters(toStateWith1);
+			DFAState updatedState = new DFAState( dfaTable.get(dfaStates.get(i)).name );
+			if (dfaTable.get(toStateWith0) == null) {
+				dfaStates.add(toStateWith0);
+				DFAState temp = new DFAState( toStateWith0 );
+				dfaTable.put( toStateWith0 , temp );
+				dfaStates.add(toStateWith0);
+				updatedState.transition0=temp;
+			}
+			else{
+				updatedState.transition0=dfaTable.get(toStateWith0);
+			}
+			if (dfaTable.get(toStateWith1) == null) {
+				dfaStates.add(toStateWith1);
+				DFAState temp = new DFAState( toStateWith1 );
+				dfaTable.put( toStateWith1 , temp );
+				dfaStates.add(toStateWith1);
+				updatedState.transition1=temp;
+			}
+			else{
+				updatedState.transition1=dfaTable.get(toStateWith1);
+			}
+			updatedState.goal=goalTest(dfaStates.get(i), goals);
+			dfaTable.replace(dfaStates.get(i), updatedState);
+		}
+		
+		dfaTable.forEach((k,v)->{
+			System.out.println(v.name+" -> "+v.transition0.name+" -> "+v.transition1.name+" -> "+v.goal);
+		});
+		
+		return dfaTable;
+	}
+	
+	
+	public static void main(String[]args) {
+		String inputNfa = "0,0;0,1;1,3#1,2;2,4;4,4#0,1;3,4#3,4";
+		Hashtable<String, State> nfaStates = constructTables(inputNfa);
+		String[] transitions = inputNfa.split("#",0);
+		String goals = transitions[3].replaceAll(",", "");
+		Hashtable<String, DFAState> dfaTable = nfaToDfa(nfaStates,""+inputNfa.charAt(0),goals);
+		String[] tests = {
+				"0010",
+				"0111",
+				"1010",
+				"1111",
+				"0110",
+		};
+		DFA x = new DFA(dfaTable, tests,""+inputNfa.charAt(0));
+		x.run();
+	}
+		
+}
+	
+	
+

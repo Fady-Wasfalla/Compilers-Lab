@@ -1,0 +1,13 @@
+package lab_2;
+
+public class NFA {
+	
+	State [] states;
+	
+	
+	public static void main(String[]args) {
+		
+	}
+	
+	
+}

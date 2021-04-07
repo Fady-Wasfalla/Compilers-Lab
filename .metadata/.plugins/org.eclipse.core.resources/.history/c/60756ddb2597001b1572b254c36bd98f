@@ -1,0 +1,28 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class DFAState {
+
+	String name;
+	DFAState transition0;
+	DFAState transition1;
+	Boolean goal;
+	
+	public DFAState(String name) {
+		this.name=name;
+	}
+	
+	public static void main(String[]args) {
+		Hashtable<String, String> dfaTable = new Hashtable<String, String>();
+		String dfaString="";
+		dfaTable.put("1", "2");
+		int i=0;
+		dfaTable.forEach((k,v)->{
+			dfaTable.put("1", "2");
+		});
+		dfaTable.forEach((k,v)->{
+			System.out.println(v);
+		});
+	}
+}

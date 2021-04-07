@@ -1,0 +1,27 @@
+package lab_2;
+
+import java.util.Hashtable;
+
+public class State {
+	
+	String name;
+	Hashtable <String, String> transitions;
+	Boolean goal;
+	
+	public State(String name,Hashtable <String, String> transitions,Boolean goal) {
+		this.name=name;
+		this.transitions=transitions;
+		this.goal=goal;
+	}
+	
+	public static void main(String[]args) {
+		String x = "1";
+		for (int i=0;i<x.length();i++) {
+			x = x+"1";
+			System.out.println(x);
+			if(x.length()==10) {
+				break;
+			}
+		}
+	}
+}

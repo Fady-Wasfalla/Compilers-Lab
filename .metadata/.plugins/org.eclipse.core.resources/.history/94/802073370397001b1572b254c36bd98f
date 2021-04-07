@@ -1,0 +1,11 @@
+package lab_2;
+
+public class State {
+	
+	String name;
+	State [] transition0;
+	State [] transition1;
+	State [] transitionE;
+	Boolean acceptance;
+	
+}

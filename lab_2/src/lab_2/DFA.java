@@ -16,10 +16,10 @@ public class DFA {
 	}
 	
 	public void run() {
-		System.out.println("DFA Table : ");
-		dfaTable.forEach((k,v)->{
-			System.out.println(v.name+" -> "+v.transition0.name+" -> "+v.transition1.name+" -> "+v.goal);
-		});
+//		System.out.println("DFA Table : ");
+//		dfaTable.forEach((k,v)->{
+//			System.out.println(v.name+" -> "+v.transition0.name+" -> "+v.transition1.name+" -> "+v.goal);
+//		});
 		System.out.println();
 		System.out.println("Test Cases : ");
 		for (int i=0;i<testCases.length;i++) {

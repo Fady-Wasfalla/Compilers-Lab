@@ -111,18 +111,25 @@ public class EliminateLeftRec {
         return result;
     }
     public static void main(String[]args){
+//        String [] inputs = {
+//                "S,aSt,aS,c",
+//                "S,StS,SxS,a",
+//                "S,StT,T;T,TxF,F;F,id",
+//                "S,EF,Fd;E,SF,ES,c;F,SE,c",
+//                "S,ScT,Sa,T,b;T,aSb,iaLb,i;L,SdL,S"
+//        };
         String [] inputs = {
-                "S,aSt,aS,c",
-                "S,StS,SxS,a",
-                "S,StT,T;T,TxF,F;F,id",
-                "S,EF,Fd;E,SF,ES,c;F,SE,c",
-                "S,ScT,Sa,T,b;T,aSb,iaLb,i;L,SdL,S"
+                "S,mSt,mS,c",
+                "S,SaS,SzS,m",
+                "S,SaT,T;T,TzG,G;G,i",
+                "S,HG,Gd;H,SG,HS,c;G,SH,c",
+                "S,ScT,Sm,T,n;T,mSn,imLn,i;L,SdL,S"
         };
         for (String input :inputs){
             System.out.println("INPUT : "+input);
             System.out.println();
             System.out.println("OUTPUT : "+LRE(input));
-            System.out.println();
+            System.out.println("=============================================");
             System.out.println();
         }
     }

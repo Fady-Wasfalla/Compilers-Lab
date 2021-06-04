@@ -1,0 +1,23 @@
+Task 7 Test Cases
+-----------------------------
+1) S,aBDh;B,cA;A,bA,e;D,EF;E,g,e;F,f,e
+First: S,a;B,c;A,be;D,efg;E,eg;F,ef 
+Follow: S,$;B,fgh;A,fgh;D,h;E,fh;F,h  
+______________________________________
+2) S,A;A,aY,Ad;Y,b
+First: S,a;A,a;Y,b  
+Follow: S,$;A,d$;Y,d$  
+______________________________________
+3) S,bLc,a;L,SN;N,kSN,e
+First: S,ab;L,ab;N,ek 
+Follow: S,ck$;L,c;N,c 
+______________________________________
+4) S,Sa,B;B,cB,D;D,o,e
+First: S,aceo;B,ceo;D,eo 
+Follow: S,a$;B,a$;D,a$ 
+______________________________________
+5) S,ACB,CbB,Ba;A,da,BC;B,g,e;C,h,e
+First: S,abdegh;A,degh;B,eg;C,eh   
+Follow: S,$;A,gh$;B,agh$;C,bgh$ 
+______________________________________
+

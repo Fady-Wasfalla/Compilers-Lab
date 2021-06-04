@@ -273,11 +273,11 @@ public class FirstAndFollow {
                                 }
                                 String index = value.charAt(i + n) + "";
                                 if(!index.matches("[A-Z]+")){
-                                       if(!updatedRules.contains(index)){
-                                           updatedRules.add(index);
-                                           followHash.put(value.charAt(i)+"",updatedRules);
-                                           res=true;
-                                       }
+                                    if(!updatedRules.contains(index)){
+                                        updatedRules.add(index);
+                                        followHash.put(value.charAt(i)+"",updatedRules);
+                                        res=true;
+                                    }
                                 }else{
                                     if(firstHash.get(index).contains("e")){
                                         next=true;

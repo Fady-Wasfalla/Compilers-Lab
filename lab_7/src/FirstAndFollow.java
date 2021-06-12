@@ -325,12 +325,23 @@ public class FirstAndFollow {
 
 
     public static void main(String[]args){
-        String[]input = {
-                "S,aBDh;B,cA;A,bA,e;D,EF;E,g,e;F,f,e",
-                "S,A;A,aY,Ad;Y,b",
-                "S,bLc,a;L,SN;N,kSN,e",
-                "S,Sa,B;B,cB,D;D,o,e",
-                "S,ACB,CbB,Ba;A,da,BC;B,g,e;C,h,e"
+//        String[]input = {
+//                "S,aBDh;B,cA;A,bA,e;D,EF;E,g,e;F,f,e",
+//                "S,A;A,aY,Ad;Y,b",
+//                "S,bLc,a;L,SN;N,kSN,e",
+//                "S,Sa,B;B,cB,D;D,o,e",
+//                "S,ACB,CbB,Ba;A,da,BC;B,g,e;C,h,e"
+//        };
+        String[] input ={
+                "S,tOlS,d;O,OQ,zSzQ,z,e;Q,Qz,s,e",
+
+                "S,cOS,ftE,f;O,ccft,SES,e;E,tO,tw",
+
+                "S,XSqX,SoXt,key;X,qtrX,mn,b",
+
+                "S,SpHr,a;T,STH,pUr,yU;H,SrH,Uio,e;U,hi,a",
+
+                "S,Szf,QzQQ,dok;Q,fScz,zie,zf"
         };
         for(String x : input){
             System.out.println("====== "+x+" ======");

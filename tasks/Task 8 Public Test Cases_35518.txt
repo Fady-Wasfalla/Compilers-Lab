@@ -1,0 +1,16 @@
+
+S,zToS,n,e;T,zTo,No;N,n,e#S,z,n,e;T,z,no;N,n,e#S,$;T,o;N,o
+
+zzznoooon -> S,zToS,zzTooS,zzzToooS,zzzNooooS,zzznooooS,zzznoooon
+zzooo -> S,zToS,zzTooS,zzNoooS,zzoooS,zzooo
+zoozznooo -> S,zToS,zNooS,zooS,zoozToS,zoozzTooS,zoozzNoooS,zoozznoooS,zoozznooo
+zooznoon -> S,zToS,zNooS,zooS,zoozToS,zoozNooS,zooznooS,zooznoon
+zzz -> S,zToS,zzTooS,zzzToooS,ERROR
+
+S,ipD,oSmDc,e;D,VmS,LxS;V,n,e;L,oSc,e#S,i,o,e;D,mn,ox;V,n,e;L,o,e#S,cm$;D,cm$;V,m;L,x
+
+omocxc -> S,oSmDc,omDc,omLxSc,omoScxSc,omocxSc,omocxc
+ommc -> S,oSmDc,omDc,omVmSc,ommSc,ommc
+ipxomxc -> S,ipD,ipLxS,ipxS,ipxoSmDc,ipxomDc,ipxomLxSc,ipxomxSc,ipxomxc
+omocxipmc -> S,oSmDc,omDc,omLxSc,omoScxSc,omocxSc,omocxipDc,omocxipVmSc,omocxipmSc,omocxipmc
+oo -> S,oSmDc,ooSmDcmDc,oomDcmDc,ERROR

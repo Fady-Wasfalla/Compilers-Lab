@@ -15,14 +15,15 @@ public class LL1 {
 
     public static String returnRule(String key,String terminal){
         ArrayList<String> rules =  cfg.get(key);
-//        System.out.println("=====> key: "+ key +" , terminal: "+terminal );
         for(int i=0;i<rules.size();i++){
             String curRule = rules.get(i);
-//            System.out.println("*** curRule: "+curRule);
             for(int j=0;j<curRule.length();j++){
                 if( (curRule.charAt(0) + "").equals("e") ){
                     continue;
                 }
+                Boolean b = (key.equals("Y") && terminal.equals("$"))?true:false;
+//                if(b)
+//                    System.out.println("##########################################1 "+curRule.charAt(0));
                 if (checkTerminal(curRule.charAt(0)) ) { // if first char is terminal or epsilon
                     if ((curRule.charAt(0) + "").equals(terminal)) {
                         return curRule;
@@ -40,15 +41,15 @@ public class LL1 {
                         }
                     }else{
                         if(first.get(curRule.charAt(j)+"").contains(terminal)){
-//                            System.out.println("HEREEE " +curRule+" "+curRule.charAt(j));
                             return curRule;
                         }
-                        if(!first.get(curRule.charAt(j)+"").contains("e")){
+                        if(!first.get(curRule.charAt(j)+"").contains("e") && i==rules.size()-1){
                             return "NA";
                         }
                     }
-                    if(j==curRule.length()-1 && !first.get(curRule.charAt(j)+"").contains("e")){
+                    if(j==curRule.length()-1 && first.get(curRule.charAt(j)+"").contains("e")){
                         if(follow.get(key).contains(terminal)){
+//                            System.out.println("****************");
                             return curRule;
                         }
                     }
@@ -56,7 +57,6 @@ public class LL1 {
             }
         }
         if (first.get(key).contains("e") && follow.get(key).contains(terminal)){
-//            System.out.println("EMPTY CASE");
             return "e";
         }
         return "NA";
@@ -77,7 +77,6 @@ public class LL1 {
 
         for(int i=0;i<firS.split(";").length;i++){
             ArrayList<String> fills =  new ArrayList<String>(Arrays.asList( firS.split(";")[i].split(",") ));
-//            System.out.println(fills);
             String keyT = fills.remove(0);
             ArrayList f =  new ArrayList<>();
             for(int j=0;j<fills.size();j++){
@@ -116,7 +115,7 @@ public class LL1 {
                 llKey.add(k);
                 llKey.add(terminals.get(j));
                 String fillTable = returnRule(k,terminals.get(j));
-//                System.out.println("Rules "+k+" "+terminals.get(j)+" return: "+fillTable);
+//                System.out.println("++++++++++++++++++++ Rules "+k+" "+terminals.get(j)+" return: "+fillTable);
                 llTable.put(llKey,fillTable);
 
             }
@@ -160,6 +159,7 @@ public class LL1 {
             if(pop.equals("$") && !(inp[index]+"").equals(pop)){
                 flag=false;
                 print.add("ERROR");
+                break;
             }
             if( !checkTerminal(pop.charAt(0)) ) {
                 HashSet<String> key = new HashSet<String>();
@@ -204,19 +204,33 @@ public class LL1 {
         return result;
     }
     public static void main(String[] args) {
-        String input1 = "S,zToS,n,e;T,zTo,No;N,n,e#S,z,n,e;T,z,no;N,n,e#S,$;T,o;N,o";
-        String [] tests = {"zzznoooon","zzooo","zoozznooo","zooznoon","zzz"};
+        String input1 = "S,aX,xX;X,bY,cY,yS;Y,X,x#S,a,x;X,b,c,y;Y,bcy,x#S,$;X,$;Y,$";
+        String [] tests = {
+                "ayacx",
+                "xcbx",
+                "xbyxcx",
+                "acyxcbx",
+                "abc"
+        };
         System.out.println("========= " + input1 + " =========");
         for (String t : tests){
             System.out.println(t+" -> "+parse(input1,t));
         }
         System.out.println();
-        String input2 = "S,ipD,oSmDc,e;D,VmS,LxS;V,n,e;L,oSc,e#S,i,o,e;D,mn,ox;V,n,e;L,o,e#S,cm$;D,cm$;V,m;L,x";
+        String input2 = "S,oLc,a;L,oLcD,aD;D,mSD,e#S,o,a;L,o,a;D,m,e#S,cm$;L,c;D,c";
         System.out.println("========= " + input2 + " =========");
 
-        String [] tests1 = {"omocxc","ommc","ipxomxc","omocxipmc","oo"};
+        String [] tests1 = {
+                "oamac",
+                "ooacc",
+                "oamamac",
+                "oamoamacc",
+                "oacoc"
+        };
         for (String t : tests1){
             System.out.println(t+" -> "+parse(input2,t));
         }
+
+        System.out.println(checkTerminal('x'));
     }
 }
